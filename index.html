@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci en las Flores</title>
+    <link rel="stylesheet" href="estilos.css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================
+         ENCABEZADO
+    ============================= -->
+    <header class="encabezado">
+        <div class="flores-deco" aria-hidden="true">
+            <span>🌸</span><span>🌼</span><span>🌺</span><span>🌻</span><span>🌷</span>
+        </div>
+        <h1>Fibonacci en el Diseño Natural de las Flores</h1>
+        <p class="subtitulo">Matemáticas que resuelven problemas del mundo real</p>
+        <p class="autor">Desafío Web — Programación Web</p>
+    </header>
+
+    <main class="contenedor">
+
+        <!-- ============================
+             CONTEXTO DEL PROBLEMA
+        ============================= -->
+        <section class="seccion tarjeta" id="contexto">
+            <h2>🌿 Contexto del Problema</h2>
+            <p>
+                ¿Alguna vez contaste los pétalos de una margarita? Casi siempre
+                encontrarás <strong>13, 21 o 34</strong> pétalos, nunca un número al azar.
+                Esto no es casualidad: la naturaleza utiliza la <strong>Serie de Fibonacci</strong>
+                para organizar el crecimiento de flores, hojas y semillas de la manera
+                más eficiente posible.
+            </p>
+            <p>
+                Este fenómeno se llama <strong>filotaxia</strong> y describe cómo cada nuevo
+                pétalo, hoja o semilla crece en una posición que maximiza el espacio disponible
+                y la exposición a la luz solar. El resultado es una espiral perfecta que sigue
+                exactamente los números de Fibonacci.
+            </p>
+
+            <div class="tabla-flores">
+                <h3>Ejemplos reales en flores</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Flor</th>
+                            <th>Número de pétalos</th>
+                            <th>Número Fibonacci</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>🌷 Lirio</td><td>3</td><td>F(4) = 3</td></tr>
+                        <tr><td>🌸 Violeta / Clavel</td><td>5</td><td>F(5) = 5</td></tr>
+                        <tr><td>🌼 Delfinium</td><td>8</td><td>F(6) = 8</td></tr>
+                        <tr><td>🌺 Caléndula</td><td>13</td><td>F(7) = 13</td></tr>
+                        <tr><td>🌻 Crisantemo</td><td>21</td><td>F(8) = 21</td></tr>
+                        <tr><td>🌼 Margarita</td><td>34</td><td>F(9) = 34</td></tr>
+                        <tr><td>🌻 Girasol</td><td>55 – 89</td><td>F(10)–F(11)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============================
+             EXPLICACIÓN DEL ALGORITMO
+        ============================= -->
+        <section class="seccion tarjeta" id="algoritmo">
+            <h2>🧮 Explicación del Algoritmo</h2>
+            <p>
+                La Serie de Fibonacci es una secuencia donde <strong>cada número es la
+                suma de los dos anteriores</strong>. Comienza con 0 y 1:
+            </p>
+            <div class="secuencia-visual">
+                <span>0</span><span class="op">+</span>
+                <span>1</span><span class="op">→</span>
+                <span>1</span><span class="op">→</span>
+                <span>2</span><span class="op">→</span>
+                <span>3</span><span class="op">→</span>
+                <span>5</span><span class="op">→</span>
+                <span>8</span><span class="op">→</span>
+                <span>13</span><span class="op">→</span>
+                <span class="puntos">…</span>
+            </div>
+            <p>
+                Aplicado a las flores: cada <strong>nivel de crecimiento</strong> representa
+                un término de la secuencia. El número en ese nivel indica cuántos pétalos
+                o ramas podría tener la planta en esa etapa, siguiendo el patrón
+                que la naturaleza ya utiliza.
+            </p>
+            <p>
+                El algoritmo usa <strong>tres variables simples</strong> (a, b, c) y un
+                ciclo <code>while</code> para calcular cada término sin necesidad de
+                vectores ni funciones complejas.
+            </p>
+        </section>
+
+        <!-- ============================
+             FORMULARIO
+        ============================= -->
+        <section class="seccion tarjeta" id="simulador">
+            <h2>🌸 Simulador de Crecimiento Floral</h2>
+            <p class="desc-form">
+                Ingresa cuántos niveles de crecimiento deseas analizar y observa
+                cómo la Serie de Fibonacci describe el patrón de la flor.
+            </p>
+
+            <form id="form-fibonacci" onsubmit="return false;" novalidate>
+                <div class="grupo-input">
+                    <label for="niveles">Número de niveles de crecimiento:</label>
+                    <input
+                        type="number"
+                        id="niveles"
+                        min="1"
+                        max="30"
+                        value="8"
+                        placeholder="ej. 8"
+                        required
+                    >
+                    <small>Mínimo: 1 · Máximo: 30 niveles</small>
+                </div>
+                <button type="button" onclick="calcularFibonacci()">
+                    🌱 Calcular Secuencia
+                </button>
+            </form>
+
+            <!-- RESULTADO -->
+            <div id="resultado" class="resultado-box" aria-live="polite">
+                <span class="placeholder-texto">El resultado aparecerá aquí 🌼</span>
+            </div>
+        </section>
+
+        <!-- ============================
+             CÓDIGO EXPLICADO
+        ============================= -->
+        <section class="seccion tarjeta" id="codigo">
+            <h2>💻 ¿Cómo funciona el código JavaScript?</h2>
+            <p>
+                El siguiente código es la función principal del simulador.
+                Cada línea está comentada para explicar exactamente qué hace:
+            </p>
+
+            <div class="bloque-codigo">
+<pre><code><span class="com">// Función principal que se ejecuta al presionar el botón</span>
+function calcularFibonacci() {
+
+    <span class="com">// 1. Capturamos el valor del input usando getElementById</span>
+    var niveles = parseInt(document.getElementById('niveles').value);
+    var divResultado = document.getElementById('resultado');
+
+    <span class="com">// 2. Validamos que el valor sea un número entre 1 y 30</span>
+    if (isNaN(niveles) || niveles &lt; 1 || niveles &gt; 30) {
+        divResultado.innerHTML =
+            "&lt;span class='error-msg'&gt;⚠ Ingresa un número entre 1 y 30.&lt;/span&gt;";
+        return;
+    }
+
+    <span class="com">// 3. Iniciamos las tres variables de la serie:
+    //    a = término anterior (empieza en 0)
+    //    b = término actual  (empieza en 1)
+    //    c = variable temporal para el intercambio</span>
+    var a = 0;
+    var b = 1;
+    var c;
+
+    <span class="com">// 4. Variable para construir el HTML del resultado</span>
+    var html = "&lt;h3&gt;Secuencia de " + niveles + " niveles:&lt;/h3&gt;";
+    html = html + "&lt;div class='fib-grid'&gt;";
+
+    <span class="com">// 5. Ciclo while: se repite hasta cubrir todos los niveles</span>
+    var i = 1;
+    while (i &lt;= niveles) {
+
+        <span class="com">// Mostramos el nivel y su valor Fibonacci</span>
+        html = html +
+            "&lt;div class='fib-item'&gt;" +
+            "  &lt;span class='fib-nivel'&gt;Nivel " + i + "&lt;/span&gt;" +
+            "  &lt;span class='fib-valor'&gt;" + a + "&lt;/span&gt;" +
+            "  &lt;span class='fib-flor'&gt;" + obtenerFlor(a) + "&lt;/span&gt;" +
+            "&lt;/div&gt;";
+
+        <span class="com">// Calculamos el siguiente término: c = a + b</span>
+        c = a + b;
+        <span class="com">// Avanzamos: a toma el valor de b, b toma el valor de c</span>
+        a = b;
+        b = c;
+
+        i = i + 1; <span class="com">// Incrementamos el contador del nivel</span>
+    }
+
+    html = html + "&lt;/div&gt;";
+
+    <span class="com">// 6. Renderizamos el resultado en el div de la página</span>
+    divResultado.innerHTML = html;
+}</code></pre>
+            </div>
+
+            <div class="pasos-resumen">
+                <div class="paso"><span class="paso-num">1</span><p><strong>Captura:</strong> Lee el número ingresado con <code>getElementById</code>.</p></div>
+                <div class="paso"><span class="paso-num">2</span><p><strong>Validación:</strong> Verifica que el número esté entre 1 y 30.</p></div>
+                <div class="paso"><span class="paso-num">3</span><p><strong>Variables:</strong> Inicia <code>a=0</code> y <code>b=1</code> como los dos primeros términos.</p></div>
+                <div class="paso"><span class="paso-num">4</span><p><strong>Ciclo:</strong> En cada vuelta calcula <code>c = a + b</code> y avanza los valores.</p></div>
+                <div class="paso"><span class="paso-num">5</span><p><strong>Renderizado:</strong> Inyecta el HTML generado directamente en la página.</p></div>
+            </div>
+        </section>
+
+        <!-- ============================
+             CONCLUSIÓN
+        ============================= -->
+        <section class="seccion tarjeta" id="conclusion">
+            <h2>🌺 Conclusión</h2>
+            <p>
+                La Serie de Fibonacci no es solo un ejercicio matemático: es el
+                <strong>código que usa la naturaleza</strong> para construir flores
+                perfectas. Al programar este simulador, comprobamos que con solo
+                <strong>tres variables y un ciclo</strong>, podemos reproducir un
+                patrón que existe en millones de flores alrededor del mundo.
+            </p>
+            <p>
+                Esto demuestra que las matemáticas y la programación son herramientas
+                poderosas para entender y modelar fenómenos naturales, convirtiendo
+                ecuaciones abstractas en respuestas concretas y visuales.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="pie">
+        <p>Desafío Web — Fibonacci y Diseño Floral 🌸 · Programación Web</p>
+    </footer>
+
+    <script src="script/script.js"></script>
+</body>
+</html>
